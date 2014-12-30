@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+   <!-- Head.........................................................-->
+
+	<head>
+	   <title>Snail Bait</title>
+      <meta name="viewport" content="width=900"/>
+
+     <meta name='apple-mobile-web-app-capable' content='yes'>
+     <meta name='apple-mobile-web-app-status-bar-style'
+            content='black-translucent'>
+
+     <link rel='stylesheet' href='all.css'>
+     <link rel="icon" href="../favicon.ico">
+   </head>
+
+   <!-- Body.........................................................-->
+
+   <body>
+      <!-- Music.....................................................--> 
+
+      <audio id='snailbait-music' preload='auto'>
+        <source src='sounds/music.ogg' type='audio/ogg'>
+        <source src='sounds/music.mp3' type='audio/mp3'>
+      </audio>
+      
+      <!-- Sound effects..............................................-->
+      
+      <audio id='snailbait-audio-sprites' preload='auto'>
+        <source src='sounds/audio-sprites.ogg' type='audio/ogg'>
+        <source src='sounds/audio-sprites.mp3' type='audio/mp3'>
+      </audio>
+      
+      <!-- Arena.....................................................-->
+
+      <div id='snailbait-arena'>
+
+        <!-- High scores............................................ -->
+
+        <div id='snailbait-high-score-toast'>
+          <p class='snailbait-title'>High score!</p>
+
+          Enter your name:
+
+          <input id='snailbait-high-score-name' 
+                 class='snailbait-textfield'>
+                 
+          <input id='snailbait-high-score-add-score' 
+                 type='button' value='add my score' disabled='true'>
+
+          <input id='snailbait-high-score-new-game' 
+                 type='button' value='new game'>
+
+          <p id='snailbait-previous-high-scores-title'>
+             Previous High Scores
+          </p>
+
+          <div id='snailbait-previous-high-scores'> 
+            <ol id='snailbait-high-score-list'></ol>
+          </div>
+
+        </div>
+
+         <!-- Developer backdoor....................................-->
+
+         <div id='snailbait-developer-backdoor'>
+            <div class='snailbait-group' 
+                 id='snailbait-running-slowly-threshold'>
+               <span class='snailbait-prompt' 
+                     id='snailbait-running-slowly-prompt'>
+                  Running slowly threshold
+               </span>
+
+               <div id='snailbait-running-slowly-slider'></div>
+
+               <span class='snailbait-readout' 
+                     id='snailbait-running-slowly-readout'>40</span>&nbsp;fps
+            </div>
+
+            <div class='snailbait-group' id='snailbait-time-rate'>
+               <span class='snailbait-prompt' 
+                     id='snailbait-time-rate-prompt'>
+                  Time rate</span>
+
+               <div id='snailbait-time-rate-slider'></div>
+
+               <span class='snailbait-readout' 
+                     id='snailbait-time-rate-readout'>100</span>%
+            </div>
+            
+            <div class='snailbait-group' 
+                 id='snailbait-collision-rectangles'>
+               <input type='checkbox' 
+                      id='snailbait-collision-rectangles-checkbox'/>
+               Draw collision rectangles
+            </div>
+
+            <div class='snailbait-group' 
+                 id='snailbait-detect-running-slowly'>
+               <input type='checkbox' 
+                      id='snailbait-detect-running-slowly-checkbox' checked/>
+               Warn when running slowly
+            </div>
+
+            <div class='snailbait-group' 
+                 id='snailbait-smoking-holes'>
+               <input type='checkbox' 
+                      id='snailbait-smoking-holes-checkbox' checked/>
+               Smoke
+            </div>
+         </div>
+         
+         <!-- Credits...............................................-->
+
+         <div id='snailbait-credits' class='snailbait-credits'>
+            <div class='snailbait-heading'>Credits</div>
+
+            <hr></hr>
+
+            <div class='snailbait-credit'>
+               <div id='snailbait-art-title' 
+                    class='snailbait-title'>~ Art ~</div>
+
+               <div class='snailbait-attribution'><b>
+                  <a href='http://lea.verou.me/css3patterns'>
+                     CSS3 Patterns Gallery
+                  </a>:
+
+                  </b> Background pattern in CSS by Anna Kassner
+               </div>
+
+               <div class='snailbait-attribution'><b>
+                  <a href='http://bit.ly/kNzDVc'>
+                     Replica Island
+                  </a>:
+
+                  </b> All graphics except the runner and coins
+               </div>
+
+               <div class='snailbait-attribution'>
+                  <b>MJKRZAK People's Sprites:</b> 
+                  Runner spritesheet (Link no longer available)
+               </div>
+
+               <div class='snailbait-attribution'><b>
+                  <a href='http://lovershorizon.deviantart.com/art/RPG-Coins-Set-281501013'>LoversHorizon at deviantART</a>:
+                  </b> Coins
+               </div>
+            </div>
+
+            <div class='snailbait-credit'>
+               <div id='snailbait-sound-and-music-title' class='snailbait-title'>~ Sound and Music ~</div>
+
+               <div class='snailbait-attribution'>
+                  <a href='http://bit.ly/LFtwr8'>
+                     Pete Marquardt:
+                  </a>
+
+                  Soundtrack from soundclick.com
+               </div>
+
+               <div class='snailbait-attribution'>
+                  <a href='http://bit.ly/kNzDVc'>
+                     Replica Island:
+                  </a>
+
+                  Sound effects
+               </div>
+            </div> <!-- end of credit -->
+
+            <p>
+               <a id='snailbait-tweet'
+                  hashtags="#html5" target="_blank"
+                  class='snailbait-tweet-link'>
+                  Tweet my score</a>
+
+               <a id='snailbait-play-again-link' href='#'>Play again</a>
+            </p>
+            
+         </div> <!-- end of credits -->
+
+         <!-- Running slowly........................................-->
+
+         <div id='snailbait-running-slowly'>
+
+            <h1>Snail Bait is running slowly</h1>
+
+            <hr>
+
+            <p id='snailbait-slowly-warning'></p>
+            
+            <p>A wide range of applications, from video players to 
+              backup software, can slow this game down. For best results, hide all other windows on your desktop and close graphics intensive apps when you play HTML5 games.
+            </p>
+
+            <p>You should also upgrade your browser to the latest version to make sure that it has hardware accelerated HTML5 Canvas. Any version of Chrome starting with version 18, for example, has hardware accelerated
+               Canvas. Here is a link to the 
+               <a href='http://www.google.com/chrome/'>latest version of Chrome</a>.
+            </p>
+
+            <a id='snailbait-slowly-okay' href='#'>
+               Okay
+            </a>
+
+            <a  id='snailbait-slowly-dont-show' href='#'>
+               Do not show this warning again
+            </a>
+         </div>
+
+         <!-- Lives indicator........................................-->
+
+         <div id='snailbait-lives'>
+            <img id='snailbait-life-icon-left'   
+                 src='images/runner-small.png'/>
+                 
+            <img id='snailbait-life-icon-middle' 
+                 src='images/runner-small.png'/>
+
+            <img id='snailbait-life-icon-right'  
+                 src='images/runner-small.png'/>
+         </div>
+
+         <!-- Score .................................................-->
+
+         <div id='snailbait-score'>0</div>
+         <div id='snailbait-fps'></div>
+
+         <!-- Toast..................................................-->
+
+         <div id='snailbait-toast'></div>
+
+         <div id='snailbait-mobile-welcome-toast'
+              class='snailbait-mobile-toast'> <!-- mobile devices only -->
+            <div id='snailbait-welcome'>
+               Capture coins and jewels. Avoid bees and bats.
+
+               <div id='snailbait-welcome-instructions'> 
+                  <p><a href='#' class='snailbait-welcome-link' 
+                                    id='snailbait-welcome-start-link'>
+                        Start the game
+                     </a>
+                  </p>
+
+                  <p><a href='#' class='snailbait-welcome-link' 
+                                    id='snailbait-show-how-link'>
+                        Show how to use the controls
+                     </a>
+                  </p>
+               </div>
+            </div>
+         </div>
+
+         <div id='snailbait-mobile-start-toast'
+              class='snailbait-mobile-toast'> <!-- mobile devices only -->
+               <a href='#' class='snailbait-welcome-link' 
+                                 id='snailbait-mobile-start-link'>Start</a>
+         </div>
+
+         <!-- Loading screen........................................-->
+
+         <div id='snailbait-loading'>
+            <div id='snailbait-loading-title'>Loading...</div>
+            <img id='snailbait-loading-animated-gif'/> <!-- no src attribute -->
+         </div>
+            
+         <!-- The game canvas........................................-->
+
+         <canvas id='snailbait-game-canvas' width='800' height='400'>
+            Your browser does not support HTML5 Canvas.
+         </canvas>
+
+         <!-- The ruler canvas for the developer backdoor.........-->
+
+         <canvas id='snailbait-ruler-canvas' 
+                 width='800' height='20'>
+            Your browser does not support HTML5 Canvas.
+         </canvas>
+
+         <!-- Sound and music.....................................-->
+
+         <div id='snailbait-sound-and-music'>
+            <div id='snailbait-sound-checkbox-div' class='snailbait-checkbox-div'>
+               Sound <input id='snailbait-sound-checkbox' 
+                            type='checkbox' checked />
+            </div>
+          
+            <div class='snailbait-checkbox-div'>
+               Music <input id='snailbait-music-checkbox' 
+                            type='checkbox' checked G/>
+            </div>
+         </div>
+
+         <!-- Instructions........................................-->
+
+         <div id='snailbait-instructions'>
+            <div class='snailbait-keys'>
+               &larr; / d 
+               <div class='snailbait-explanation'>move left</div>
+               &rarr; / k
+               <div class='snailbait-explanation'>move right</div>
+            </div>
+
+            <div class='snailbait-keys'>
+               j <div class='snailbait-explanation'>jump</div>
+            </div>
+
+            <div class='snailbait-keys'>
+               p <div class='snailbait-explanation'>pause</div>
+            </div>
+         </div>
+
+         <div id='snailbait-mobile-instructions'>
+            <div class='snailbait-keys'>
+               Left 
+               <div class='snailbait-explanation'>Run left or jump</div>
+            </div>
+
+            <div class='snailbait-keys'>
+               Right 
+               <div class='snailbait-explanation'>Run right or jump</div>
+            </div>
+
+            <div class='snailbait-keys'>
+               p 
+               <div class='snailbait-explanation'>pause</div>
+            </div>
+         </div>
+
+         <!-- Copyright...........................................-->
+         
+         <div id='snailbait-copyright'> &copy; 2012 David Geary</div>
+      </div>
+
+      <!-- JavaScript................................................-->
+
+      <script 
+         src='http://corehtml5canvas.com:98/socket.io/socket.io.js'>
+      </script>
+
+      <script src='all.js'></script>
+  </body>
+</html>
